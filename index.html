@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Italiano Pro Bangla</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Tiro+Bangla&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -102,7 +104,7 @@ nav{
 .wave-wrap{background:#0D1117;line-height:0}
 .wave-wrap svg{display:block}
 
-/* ��─ SECTION BASE ── */
+/* ── SECTION BASE ── */
 section{padding:5rem 1.5rem}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:900;text-align:center;margin-bottom:.4rem}
 .section-bn{font-family:'Tiro Bangla',serif;display:block;font-size:.95rem;color:#888;text-align:center;margin-bottom:.6rem}
@@ -187,16 +189,6 @@ section{padding:5rem 1.5rem}
 
 /* ── PAYMENT ── */
 .payment-bg{background:white}
-.payment-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
-.pay-card{border-radius:22px;padding:2rem;border:2px solid #eee;transition:border-color .3s,transform .3s;cursor:pointer}
-.pay-card:hover{border-color:var(--green);transform:translateY(-5px)}
-.pay-card .pc-icon{font-size:2.8rem;margin-bottom:1rem}
-.pay-card h4{font-size:1.2rem;font-weight:800;margin-bottom:.3rem}
-.pay-card .pc-bn{font-family:'Tiro Bangla',serif;font-size:.85rem;color:#888;margin-bottom:1rem}
-.pay-card p{font-size:.9rem;color:#555;line-height:1.6}
-.pay-card .pc-tag{display:inline-block;background:var(--soft);color:var(--warm);font-size:.75rem;font-weight:800;padding:.2rem .7rem;border-radius:50px;margin-top:.8rem}
-
-/* payment plans */
 .plan-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:800px;margin:2.5rem auto 0}
 .plan-card{border-radius:22px;padding:2rem;text-align:center;border:2px solid #eee;transition:all .3s}
 .plan-card:hover{border-color:var(--green);transform:translateY(-5px)}
@@ -234,18 +226,42 @@ section{padding:5rem 1.5rem}
 .pc-opt:hover,.pc-opt.active{border-color:var(--green);background:#f0fff4;color:var(--green)}
 .pc-opt .opt-icon{display:block;font-size:1.5rem;margin-bottom:.3rem}
 .pc-opt .opt-bn{font-family:'Tiro Bangla',serif;font-size:.75rem;color:#888;display:block;margin-top:.2rem}
+
+/* ── SUBMIT BUTTON ── */
 .submit-btn{
   width:100%;padding:1.1rem;
   background:linear-gradient(135deg,var(--green),#00b356);
   color:white;border:none;border-radius:14px;
   font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;
-  cursor:pointer;transition:transform .2s,box-shadow .2s;
+  cursor:pointer;transition:transform .2s,box-shadow .2s,opacity .2s;
+  position:relative;
 }
-.submit-btn:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,146,70,.3)}
+.submit-btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,146,70,.3)}
+.submit-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
 .submit-bn{font-family:'Tiro Bangla',serif;font-size:.82rem;opacity:.8;display:block;margin-top:.2rem}
-.success-msg{display:none;background:#f0fff4;border:2px solid var(--green);border-radius:12px;padding:1.2rem;text-align:center;margin-top:1rem;color:var(--green);font-weight:700}
+
+/* spinner inside button */
+.btn-spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(255,255,255,.4);border-top-color:white;
+  border-radius:50%;animation:spin .7s linear infinite;
+  vertical-align:middle;margin-right:.5rem;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── ALERTS ── */
+.success-msg{
+  display:none;background:#f0fff4;border:2px solid var(--green);
+  border-radius:12px;padding:1.2rem;text-align:center;margin-top:1rem;
+  color:var(--green);font-weight:700;
+}
 .success-msg .smbn{font-family:'Tiro Bangla',serif;font-size:.9rem;opacity:.8;display:block;margin-top:.3rem}
-.error-msg{display:none;background:#fff3f3;border:2px solid #e63946;border-radius:12px;padding:1.2rem;text-align:center;margin-top:1rem;color:#e63946;font-weight:700}
+.error-msg{
+  display:none;background:#fff3f3;border:2px solid #e63946;
+  border-radius:12px;padding:1.2rem;text-align:center;margin-top:1rem;
+  color:#e63946;font-weight:700;
+}
+.error-msg .embn{font-family:'Tiro Bangla',serif;font-size:.85rem;opacity:.85;display:block;margin-top:.3rem}
 
 /* ── FAQ ── */
 .faq-bg{background:white}
@@ -373,7 +389,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     <div class="course-body">
       <div class="urgency-strip">
         🎉 Offerta speciale primi 10 iscritti — <strong>€100 di sconto!</strong>
-        <span class="bn">প্রথম ১০ জনের জন্য বিশেষ ছাড় — €१००​ ছাড়!</span>
+        <span class="bn">প্রথম ১০ জনের জন্য বিশেষ ছাড় — €100 ছাড়!</span>
       </div>
 
       <div class="price-box">
@@ -391,7 +407,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <div class="spots-bar">
         <div class="label">
           <span>🔥 Posti disponibili</span>
-          <span>3 rimasti / १०টির মধ্যে ३টি বাকি</span>
+          <span>3 rimasti / ১০টির মধ্যে ৩টি বাকি</span>
         </div>
         <div class="bar"><div class="fill"></div></div>
       </div>
@@ -418,7 +434,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
           <div>
             <div class="ii-label">Classe</div>
             <div class="ii-val">7 – 8 persone max</div>
-            <div class="ii-bn">প্রতি ক্লাসে সর্বোচ্চ ७-८ জন</div>
+            <div class="ii-bn">প্রতি ক্লাসে সর্বোচ্চ ৭-৮ জন</div>
           </div>
         </div>
         <div class="info-item">
@@ -434,7 +450,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
           <div>
             <div class="ii-label">Inizio iscrizioni</div>
             <div class="ii-val">1° Giugno 2025</div>
-            <div class="ii-bn">নথিভুক্তি: १ জুন</div>
+            <div class="ii-bn">নথিভুক্তি: ১ জুন</div>
           </div>
         </div>
         <div class="info-item">
@@ -442,7 +458,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
           <div>
             <div class="ii-label">Inizio lezioni</div>
             <div class="ii-val">15 Giugno 2025</div>
-            <div class="ii-bn">ক্লাস শুরু: १५ জুন</div>
+            <div class="ii-bn">ক্লাস শুরু: ১৫ জুন</div>
           </div>
         </div>
       </div>
@@ -467,7 +483,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <div class="pc-bn2">সম্পূর্ণ পেমেন্ট একবারে</div>
       <div class="plan-amount">€250</div>
       <div class="plan-desc">Paga tutto subito e inizia il corso. Valido per i primi 10 iscritti al prezzo scontato.</div>
-      <div class="plan-note">সম্পূর্ণ €२५० একবারে পরিশোধ করুন</div>
+      <div class="plan-note">সম্পূর্ণ €250 একবারে পরিশোধ করুন</div>
     </div>
     <div class="plan-card featured">
       <h4>Pagamento in 2 Rate</h4>
@@ -490,14 +506,15 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     <div class="form-bn-title">নথিভুক্তির অনুরোধ — ফর্ম পূরণ করুন</div>
 
     <div class="form-info-box">
-      📌 Le iscrizioni aprono il <strong>१° Giugno 2025</strong>. Le lezioni iniziano il <strong>१५ Giugno 2025</strong>. Ogni classe ha massimo ७–८ posti.
-      <span class="fbn">নথিভুক্তি শুরু: १ জুন २०२५ | ক্লাস শুরু: १५ জুন | প্রতি ক্লাসে সর্বোচ্চ ७-८ জন</span>
+      📌 Le iscrizioni aprono il <strong>1° Giugno 2025</strong>. Le lezioni iniziano il <strong>15 Giugno 2025</strong>. Ogni classe ha massimo 7–8 posti.
+      <span class="fbn">নথিভুক্তি শুরু: ১ জুন ২০২৫ | ক্লাস শুরু: ১৫ জুন | প্রতি ক্লাসে সর্বোচ্চ ৭-৮ জন</span>
     </div>
 
-    <form id="enroll-form" action="https://formspree.io/f/xwvzjnww" method="POST">
+    <!-- form senza action: gestito da EmailJS via JS -->
+    <form id="enroll-form">
       <div class="form-row">
         <div class="form-group">
-          <label>Nome <span class="lbn">নাম (ইতালীয়ত���)</span></label>
+          <label>Nome <span class="lbn">নাম (ইতালীয়তে)</span></label>
           <input type="text" name="nome" placeholder="Mario" required/>
         </div>
         <div class="form-group">
@@ -531,14 +548,14 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <div class="form-group">
         <label>Piano di pagamento <span class="lbn">পেমেন্ট পরিকল্পনা</span></label>
         <div class="payment-choose">
-          <div class="pc-opt" onclick="selectPlan(this,'unico')">
+          <div class="pc-opt" onclick="selectPlan(this,'Unico (€250)')">
             <span class="opt-icon">✅</span>Unico (€250)<span class="opt-bn">একবারে পেমেন্ট</span>
           </div>
-          <div class="pc-opt" onclick="selectPlan(this,'rate')">
-            <span class="opt-icon">📅</span>२ Rate (€१२५×२)<span class="opt-bn">দুই কিস্তিতে</span>
+          <div class="pc-opt" onclick="selectPlan(this,'2 Rate (€125 × 2)')">
+            <span class="opt-icon">📅</span>2 Rate (€125×2)<span class="opt-bn">দুই কিস্তিতে</span>
           </div>
         </div>
-        <input type="hidden" name="piano_pagamento" id="f-plan" required/>
+        <input type="hidden" name="piano_pagamento" id="f-plan"/>
       </div>
 
       <div class="form-group">
@@ -546,7 +563,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <textarea name="note" placeholder="Scrivi qui eventuali domande o informazioni aggiuntive… / যেকোনো প্রশ্ন বা তথ্য লিখুন…"></textarea>
       </div>
 
-      <button type="submit" class="submit-btn">
+      <button type="submit" class="submit-btn" id="submit-btn">
         Invia la richiesta di iscrizione
         <span class="submit-bn">নথিভুক্তির অনুরোধ পাঠান</span>
       </button>
@@ -554,7 +571,11 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 
     <div class="success-msg" id="success-msg">
       ✅ Richiesta inviata con successo! Ti contatteremo entro 24 ore per confermare il pagamento.
-      <span class="smbn">অনুরোধ সফলভাবে পাঠানো হয়েছে! পেমেন্ট নিশ্চিত করতে २४ ঘণ্টার মধ্যে যোগাযোগ করব।</span>
+      <span class="smbn">অনুরোধ সফলভাবে পাঠানো হয়েছে! পেমেন্ট নিশ্চিত করতে ২৪ ঘণ্টার মধ্যে যোগাযোগ করব।</span>
+    </div>
+    <div class="error-msg" id="error-msg">
+      ❌ Errore durante l'invio. Riprova tra qualche istante.
+      <span class="embn">পাঠাতে সমস্যা হয়েছে। একটু পরে আবার চেষ্টা করুন।</span>
     </div>
   </div>
 </section>
@@ -569,11 +590,11 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
         Posso comprare solo il livello A0 o A1?
-        <div class="fq-bn">আমি কি শুধু A0 বা A१ আলাদা কিনতে পারি?</div>
+        <div class="fq-bn">আমি কি শুধু A0 বা A1 আলাদা কিনতে পারি?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">No, i livelli non si vendono separatamente. Il corso è disponibile solo come pacchetto completo A0–A२ al prezzo di €250 (offerta lancio).
-        <span class="fa-bn">না, কোর্সগুলি আলাদাভাবে বিক্রি হয় না। শুধুমাত্র সম্পূর্ণ A0–A२ প্যাকেজ €२५०-তে পাওয়া যায়।</span>
+      <div class="faq-a">No, i livelli non si vendono separatamente. Il corso è disponibile solo come pacchetto completo A0–A2 al prezzo di €250 (offerta lancio).
+        <span class="fa-bn">না, কোর্সগুলি আলাদাভাবে বিক্রি হয় না। শুধুমাত্র সম্পূর্ণ A0–A2 প্যাকেজ €250-তে পাওয়া যায়।</span>
       </div>
     </div>
     <div class="faq-item">
@@ -582,8 +603,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">দুই কিস্তিতে পেমেন্ট কীভাবে কাজ করে?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">La prima rata di €१२५ si paga all'iscrizione (prima di iniziare A0–A१). La seconda rata di €१२�� si paga all'inizio del livello A२.
-        <span class="fa-bn">প্রথম কিস্তি €१२५ নথিভুক্তির সময় দিতে হবে। দ্বিতীয় কিস্তি €१२५ A२ শুরুতে।</span>
+      <div class="faq-a">La prima rata di €125 si paga all'iscrizione (prima di iniziare A0–A1). La seconda rata di €125 si paga all'inizio del livello A2.
+        <span class="fa-bn">প্রথম কিস্তি €125 নথিভুক্তির সময় দিতে হবে। দ্বিতীয় কিস্তি €125 A2 শুরুতে।</span>
       </div>
     </div>
     <div class="faq-item">
@@ -592,8 +613,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">প্রতিটি ক্লাস কতক্ষণ হবে?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">Le lezioni durano tra १ ora e १ ora e ३० minuti, a seconda del capitolo trattato. La durata esatta viene comunicata prima di ogni lezione.
-        <span class="fa-bn">প্রতিটি ক্লাস १ ঘণ্টা থেকে १ ঘণ্টা ३० মিনিট হবে, অধ্যায়ের উপর নির্ভর করে।</span>
+      <div class="faq-a">Le lezioni durano tra 1 ora e 1 ora e 30 minuti, a seconda del capitolo trattato. La durata esatta viene comunicata prima di ogni lezione.
+        <span class="fa-bn">প্রতিটি ক্লাস ১ ঘণ্টা থেকে ১ ঘণ্টা ৩০ মিনিট হবে, অধ্যায়ের উপর নির্ভর করে।</span>
       </div>
     </div>
     <div class="faq-item">
@@ -612,8 +633,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">ছাড় কি এখনও পাওয়া যাচ্ছে?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">Lo sconto di €१०० (da €३५० a €२५०) è valido solo per i primi १० iscritti. Affrettati — i posti si stanno esaurendo!
-        <span class="fa-bn">€१०० ছাড় (€३५० থেকে €२५०) শুধুমাত্র প্রথম १० জনের জন্য। তাড়াতাড়ি করুন!</span>
+      <div class="faq-a">Lo sconto di €100 (da €350 a €250) è valido solo per i primi 10 iscritti. Affrettati — i posti si stanno esaurendo!
+        <span class="fa-bn">€100 ছাড় (€350 থেকে €250) শুধুমাত্র প্রথম ১০ জনের জন্য। তাড়াতাড়ি করুন!</span>
       </div>
     </div>
     <div class="faq-item">
@@ -622,8 +643,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">প্রতিটি ক্লাসে কতজন থাকবে?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">Ogni classe ha un massimo di ७–८ persone, per garantire un'attenzione personalizzata e un ambiente familiare.
-        <span class="fa-bn">প্রতিটি ক্লাসে সর্বোচ্চ ७-८ জন, যাতে সবাই ব্যক্তিগত মনোযোগ পায়।</span>
+      <div class="faq-a">Ogni classe ha un massimo di 7–8 persone, per garantire un'attenzione personalizzata e un ambiente familiare.
+        <span class="fa-bn">প্রতিটি ক্লাসে সর্বোচ্চ ৭-৮ জন, যাতে সবাই ব্যক্তিগত মনোযোগ পায়।</span>
       </div>
     </div>
   </div>
@@ -632,48 +653,97 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 <!-- FOOTER -->
 <footer>
   <strong>🇮🇹 Italiano Pro Bangla — Corsi per bengalesi in Italia</strong>
-  <span class="fbn">বাংলাদেশী ও বাংলাভাষীদের জন্য ইতালীয় ভাষা কোর্স &nbsp;|&nbsp; © २०२५</span>
+  <span class="fbn">বাংলাদেশী ও বাংলাভাষীদের জন্য ইতালীয় ভাষা কোর্স &nbsp;|&nbsp; © 2025</span>
 </footer>
 
 <script>
-// Payment plan select
-let planSelected = '';
-function selectPlan(el, val){
-  const siblings = el.parentElement.querySelectorAll('.pc-opt');
-  siblings.forEach(e => e.classList.remove('active'));
-  el.classList.add('active');
-  planSelected = val;
-  document.getElementById('f-plan').value = val;
-}
+  // ── EmailJS init ──────────────────────────────────────────
+  emailjs.init('amI7zkN3o539HGjsb');   // Public Key
 
-// FAQ toggle
-function toggleFaq(el){
-  const item = el.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if(!wasOpen) item.classList.add('open');
-}
+  const SERVICE_ID  = 'service_vsk4bfo';
+  const TEMPLATE_ID = 'template_5ctj4yx';
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t) t.scrollIntoView({behavior:'smooth'});
-  });
-});
-
-// Formspree form handling
-const form = document.getElementById('enroll-form');
-form.addEventListener('submit', function(e) {
-  const planValue = document.getElementById('f-plan').value;
-  if(!planValue) {
-    e.preventDefault();
-    alert('Seleziona un piano di pagamento.\nপেমেন্ট পরিকল্পনা বেছে নিন।');
-    return;
+  // ── Payment plan select ───────────────────────────────────
+  function selectPlan(el, val) {
+    el.parentElement.querySelectorAll('.pc-opt').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('f-plan').value = val;
   }
-  // Form will submit to Formspree via action attribute
-});
+
+  // ── FAQ toggle ────────────────────────────────────────────
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // ── Smooth scroll ─────────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // ── Form submit → EmailJS ─────────────────────────────────
+  document.getElementById('enroll-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Validate piano pagamento
+    const piano = document.getElementById('f-plan').value;
+    if (!piano) {
+      alert('Seleziona un piano di pagamento.\nপেমেন্ট পরিকল্পনা বেছে নিন।');
+      return;
+    }
+
+    const btn       = document.getElementById('submit-btn');
+    const successEl = document.getElementById('success-msg');
+    const errorEl   = document.getElementById('error-msg');
+
+    // Reset messages
+    successEl.style.display = 'none';
+    errorEl.style.display   = 'none';
+
+    // Loading state
+    btn.disabled  = true;
+    btn.innerHTML = '<span class="btn-spinner"></span> Invio in corso… / পাঠানো হচ্ছে…';
+
+    // Collect form data
+    const formData = new FormData(this);
+    const templateParams = {
+      nome:            formData.get('nome'),
+      cognome:         formData.get('cognome'),
+      email:           formData.get('email'),
+      telefono:        formData.get('telefono'),
+      citta:           formData.get('citta') || '—',
+      livello:         formData.get('livello'),
+      piano_pagamento: piano,
+      note:            formData.get('note') || '—',
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+      .then(() => {
+        // Success
+        successEl.style.display = 'block';
+        document.getElementById('enroll-form').reset();
+        document.querySelectorAll('.pc-opt').forEach(o => o.classList.remove('active'));
+        document.getElementById('f-plan').value = '';
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch((err) => {
+        // Error
+        console.error('EmailJS error:', err);
+        errorEl.style.display = 'block';
+        errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .finally(() => {
+        // Restore button
+        btn.disabled  = false;
+        btn.innerHTML = 'Invia la richiesta di iscrizione <span class="submit-bn">নথিভুক্তির অনুরোধ পাঠান</span>';
+      });
+  });
 </script>
 </body>
 </html>
