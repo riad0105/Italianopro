@@ -123,42 +123,42 @@ section{padding:5rem 1.5rem}
 /* ── ORARI ── */
 .orari-bg{background:var(--dark)}
 .orari-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1.2rem;max-width:900px;margin:2.5rem auto 0;
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:1.4rem;max-width:860px;margin:2.5rem auto 0;
 }
 .orario-card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;padding:1.6rem 1.4rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;padding:2rem 2rem;
   text-align:center;transition:all .3s;
   position:relative;overflow:hidden;
+  flex:1 1 200px;max-width:250px;
 }
 .orario-card::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(0,146,70,.15),transparent);
+  background:linear-gradient(135deg,rgba(0,146,70,.2),transparent 70%);
   opacity:0;transition:opacity .3s;
 }
-.orario-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,146,70,.2)}
+.orario-card:hover{border-color:var(--green);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,146,70,.25)}
 .orario-card:hover::before{opacity:1}
 .orario-day{
   font-family:'Playfair Display',serif;
-  font-size:1.25rem;font-weight:900;color:white;margin-bottom:.3rem;
+  font-size:1.35rem;font-weight:900;color:white;margin-bottom:.25rem;
 }
-.orario-day-bn{font-family:'Tiro Bangla',serif;font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:.9rem}
+.orario-day-bn{font-family:'Tiro Bangla',serif;font-size:.88rem;color:rgba(255,255,255,.45);margin-bottom:1.1rem}
 .orario-time{
   display:inline-block;
   background:linear-gradient(135deg,var(--gold),var(--warm));
   color:white;border-radius:50px;
-  padding:.45rem 1.2rem;font-size:1.3rem;font-weight:800;
-  box-shadow:0 4px 16px rgba(245,166,35,.3);
+  padding:.55rem 1.6rem;font-size:1.6rem;font-weight:800;
+  box-shadow:0 6px 20px rgba(245,166,35,.35);letter-spacing:1px;
 }
-.orario-time-bn{font-family:'Tiro Bangla',serif;font-size:.78rem;color:rgba(255,255,255,.45);margin-top:.6rem}
+.orario-time-bn{font-family:'Tiro Bangla',serif;font-size:.8rem;color:rgba(255,255,255,.4);margin-top:.75rem}
 .orari-note{
-  text-align:center;margin-top:2rem;
-  color:rgba(255,255,255,.45);font-size:.88rem;
+  text-align:center;margin-top:2.5rem;
+  color:rgba(255,255,255,.4);font-size:.88rem;
 }
-.orari-note span{font-family:'Tiro Bangla',serif;display:block;margin-top:.3rem;font-size:.82rem;color:rgba(255,255,255,.3)}
+.orari-note span{font-family:'Tiro Bangla',serif;display:block;margin-top:.3rem;font-size:.82rem;color:rgba(255,255,255,.25)}
 
 /* ── COURSE ── */
 .course-bg{background:var(--cream)}
@@ -377,7 +377,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     Impara<br>
     <span class="accent">l'Italiano</span>
   </h1>
-  <p class="hero-bengali">ইতালীয় ভাষা শিখুন — সহজ ও মজাদার উপায়ে</p>
+  <p class="hero-bengali">ইতালিয়ান ভাষা শিখুন — সহজ ও মজাদার উপায়ে</p>
 
   <p class="hero-sub">
     Un corso completo dal livello A0 al A2, pensato appositamente per chi parla bengalese e vive in Italia.
@@ -449,20 +449,20 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 
     <div class="course-body">
       <div class="urgency-strip">
-        🎉 Offerta speciale primi 10 iscritti — <strong>€100 di sconto!</strong>
-        <span class="bn">প্রথম ১০ জনের জন্য বিশেষ ছাড় — €100 ছাড়!</span>
+        🎉 Offerta speciale primi 10 iscritti — <strong>€80 di sconto!</strong>
+        <span class="bn">প্রথম ১০ জনের জন্য বিশেষ ছাড় — €80 ছাড়!</span>
       </div>
 
       <div class="price-box">
         <div>
-          <div class="price-original">€ 350</div>
+          <div class="price-original">€ 300</div>
           <div style="font-size:.75rem;color:#bbb;text-align:center;font-family:'Tiro Bangla',serif">আসল মূল্য</div>
         </div>
         <div class="price-now">
-          <div><span class="currency">€</span><span class="amount">250</span></div>
+          <div><span class="currency">€</span><span class="amount">220</span></div>
           <div class="note">মূল্য (প্রথম ১০ জনের জন্য)</div>
         </div>
-        <div class="discount-badge">-€100<br>SCONTO</div>
+        <div class="discount-badge">-€80<br>SCONTO</div>
       </div>
 
       <div class="spots-bar">
@@ -536,15 +536,9 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 <section class="orari-bg" id="orari">
   <h2 class="section-title" style="color:white">🕐 Orari delle <span style="background:linear-gradient(90deg,var(--gold),var(--warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Lezioni</span></h2>
   <span class="section-bn" style="color:rgba(255,255,255,.5)">ক্লাসের সময়সূচী</span>
-  <p class="section-sub" style="color:rgba(255,255,255,.45)">Scegli la fascia oraria che fa per te — 5 corsi disponibili.<br><span style="font-family:'Tiro Bangla',serif;font-size:.9rem">আপনার সুবিধামতো সময় বেছে নিন — ৫টি কোর্স উপলব্ধ</span></p>
+  <p class="section-sub" style="color:rgba(255,255,255,.45)">Scegli la fascia oraria che fa per te — 3 corsi disponibili.<br><span style="font-family:'Tiro Bangla',serif;font-size:.9rem">আপনার সুবিধামতো সময় বেছে নিন — ৩টি কোর্স উপলব্ধ</span></p>
 
   <div class="orari-grid">
-    <div class="orario-card">
-      <div class="orario-day">Lunedì</div>
-      <div class="orario-day-bn">সোমবার</div>
-      <div class="orario-time">17:00</div>
-      <div class="orario-time-bn">বিকেল ৫:০০</div>
-    </div>
     <div class="orario-card">
       <div class="orario-day">Martedì</div>
       <div class="orario-day-bn">মঙ্গলবার</div>
@@ -560,12 +554,6 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     <div class="orario-card">
       <div class="orario-day">Giovedì</div>
       <div class="orario-day-bn">বৃহস্পতিবার</div>
-      <div class="orario-time">17:00</div>
-      <div class="orario-time-bn">বিকেল ৫:০০</div>
-    </div>
-    <div class="orario-card">
-      <div class="orario-day">Venerdì</div>
-      <div class="orario-day-bn">শুক্রবার</div>
       <div class="orario-time">16:00</div>
       <div class="orario-time-bn">বিকেল ৪:০০</div>
     </div>
@@ -587,14 +575,14 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     <div class="plan-card">
       <h4>Pagamento Unico</h4>
       <div class="pc-bn2">সম্পূর্ণ পেমেন্ট একবারে</div>
-      <div class="plan-amount">€250</div>
+      <div class="plan-amount">€220</div>
       <div class="plan-desc">Paga tutto subito e inizia il corso. Valido per i primi 10 iscritti al prezzo scontato.</div>
-      <div class="plan-note">সম্পূর্ণ €250 একবারে পরিশোধ করুন</div>
+      <div class="plan-note">সম্পূর্ণ €220 একবারে পরিশোধ করুন</div>
     </div>
     <div class="plan-card featured">
       <h4>Pagamento in 2 Rate</h4>
       <div class="pc-bn2">দুই কিস্তিতে পেমেন্ট</div>
-      <div class="plan-amount">€125 × 2</div>
+      <div class="plan-amount">€110 × 2</div>
       <div class="plan-desc">Prima rata all'iscrizione (inizio A0–A1), seconda rata all'inizio del livello A2.</div>
       <div class="plan-note">প্রথম কিস্তি: নথিভুক্তিতে &nbsp;|&nbsp; দ্বিতীয় কিস্তি: A2 শুরুতে</div>
     </div>
@@ -619,7 +607,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     <form id="enroll-form">
       <div class="form-row">
         <div class="form-group">
-          <label>Nome <span class="lbn">নাম (ইতালীয়তে)</span></label>
+          <label>Nome <span class="lbn">নাম (ইতালিয়ানে)</span></label>
           <input type="text" name="nome" placeholder="Mario" required/>
         </div>
         <div class="form-group">
@@ -640,7 +628,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <input type="text" name="citta" placeholder="es. Milano, Roma, Bologna…"/>
       </div>
       <div class="form-group">
-        <label>Livello di italiano attuale <span class="lbn">বর্তমান ইতালীয় স্তর</span></label>
+        <label>Livello di italiano attuale <span class="lbn">বর্তমান ইতালিয়ান স্তর</span></label>
         <select name="livello" required>
           <option value="">— Seleziona / বেছে নিন —</option>
           <option value="zero">Zero — কিছুই জানি না</option>
@@ -653,11 +641,6 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <div class="form-group">
         <label>Orario preferito <span class="lbn">পছন্দের ক্লাসের সময়</span></label>
         <div class="schedule-choose">
-          <div class="sc-opt" onclick="selectSchedule(this,'Lunedì 17:00')">
-            <span class="sc-day">Lunedì</span>
-            <span class="sc-time">17:00</span>
-            <span class="sc-bn">সোমবার বিকেল ৫টা</span>
-          </div>
           <div class="sc-opt" onclick="selectSchedule(this,'Martedì 21:00')">
             <span class="sc-day">Martedì</span>
             <span class="sc-time">21:00</span>
@@ -668,15 +651,10 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
             <span class="sc-time">21:00</span>
             <span class="sc-bn">বুধবার রাত ৯টা</span>
           </div>
-          <div class="sc-opt" onclick="selectSchedule(this,'Giovedì 17:00')">
+          <div class="sc-opt" onclick="selectSchedule(this,'Giovedì 16:00')" style="grid-column:1/-1;max-width:50%;margin:0 auto;width:100%">
             <span class="sc-day">Giovedì</span>
-            <span class="sc-time">17:00</span>
-            <span class="sc-bn">বৃহস্পতিবার বিকেল ৫টা</span>
-          </div>
-          <div class="sc-opt" onclick="selectSchedule(this,'Venerdì 16:00')" style="grid-column:1/-1;max-width:50%;margin:0 auto;width:100%">
-            <span class="sc-day">Venerdì</span>
             <span class="sc-time">16:00</span>
-            <span class="sc-bn">শুক্রবার বিকেল ৪টা</span>
+            <span class="sc-bn">বৃহস্পতিবার বিকেল ৪টা</span>
           </div>
         </div>
         <input type="hidden" name="orario_preferito" id="f-schedule"/>
@@ -686,11 +664,11 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <div class="form-group">
         <label>Piano di pagamento <span class="lbn">পেমেন্ট পরিকল্পনা</span></label>
         <div class="payment-choose">
-          <div class="pc-opt" onclick="selectPlan(this,'Unico (€250)')">
-            <span class="opt-icon">✅</span>Unico (€250)<span class="opt-bn">একবারে পেমেন্ট</span>
+          <div class="pc-opt" onclick="selectPlan(this,'Unico (€220)')">
+            <span class="opt-icon">✅</span>Unico (€220)<span class="opt-bn">একবারে পেমেন্ট</span>
           </div>
-          <div class="pc-opt" onclick="selectPlan(this,'2 Rate (€125 × 2)')">
-            <span class="opt-icon">📅</span>2 Rate (€125×2)<span class="opt-bn">দুই কিস্তিতে</span>
+          <div class="pc-opt" onclick="selectPlan(this,'2 Rate (€110 × 2)')">
+            <span class="opt-icon">📅</span>2 Rate (€110×2)<span class="opt-bn">দুই কিস্তিতে</span>
           </div>
         </div>
         <input type="hidden" name="piano_pagamento" id="f-plan"/>
@@ -731,8 +709,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">আমি কি যেকোনো সময় বেছে নিতে পারি?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">Sì! Ci sono 5 corsi con orari diversi: Lunedì 17:00, Martedì 21:00, Mercoledì 21:00, Giovedì 17:00 e Venerdì 16:00. Ogni classe ha max 7–8 posti, quindi scegli subito il tuo orario preferito nel modulo di iscrizione.
-        <span class="fa-bn">হ্যাঁ! ৫টি ভিন্ন সময়ের কোর্স আছে। নথিভুক্তির সময় আপনার পছন্দের সময় বেছে নিন।</span>
+      <div class="faq-a">Sì! Ci sono 3 corsi con orari diversi: Martedì 21:00, Mercoledì 21:00 e Giovedì 16:00. Ogni classe ha max 7–8 posti, quindi scegli subito il tuo orario preferito nel modulo di iscrizione.
+        <span class="fa-bn">হ্যাঁ! ৩টি ভিন্ন সময়ের কোর্স আছে: মঙ্গলবার রাত ৯টা, বুধবার রাত ৯টা এবং বৃহস্পতিবার বিকেল ৪টা।</span>
       </div>
     </div>
     <div class="faq-item">
@@ -741,8 +719,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">আমি কি শুধু A0 বা A1 আলাদা কিনতে পারি?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">No, i livelli non si vendono separatamente. Il corso è disponibile solo come pacchetto completo A0–A2 al prezzo di €250 (offerta lancio).
-        <span class="fa-bn">না, কোর্সগুলি আলাদাভাবে বিক্রি হয় না। শুধুমাত্র সম্পূর্ণ A0–A2 প্যাকেজ €250-তে পাওয়া যায়।</span>
+      <div class="faq-a">No, i livelli non si vendono separatamente. Il corso è disponibile solo come pacchetto completo A0–A2 al prezzo di €220 (offerta lancio).
+        <span class="fa-bn">না, কোর্সগুলি আলাদাভাবে বিক্রি হয় না। শুধুমাত্র সম্পূর্ণ A0–A2 প্যাকেজ €220-তে পাওয়া যায়।</span>
       </div>
     </div>
     <div class="faq-item">
@@ -751,8 +729,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">দুই কিস্তিতে পেমেন্ট কীভাবে কাজ করে?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">La prima rata di €125 si paga all'iscrizione (prima di iniziare A0–A1). La seconda rata di €125 si paga all'inizio del livello A2.
-        <span class="fa-bn">প্রথম কিস্তি €125 নথিভুক্তির সময় দিতে হবে। দ্বিতীয় কিস্তি €125 A2 শুরুতে।</span>
+      <div class="faq-a">La prima rata di €110 si paga all'iscrizione (prima di iniziare A0–A1). La seconda rata di €110 si paga all'inizio del livello A2.
+        <span class="fa-bn">প্রথম কিস্তি €110 নথিভুক্তির সময় দিতে হবে। দ্বিতীয় কিস্তি €110 A2 শুরুতে।</span>
       </div>
     </div>
     <div class="faq-item">
@@ -781,8 +759,8 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
         <div class="fq-bn">ছাড় কি এখনও পাওয়া যাচ্ছে?</div>
         <span class="arrow">▾</span>
       </div>
-      <div class="faq-a">Lo sconto di €100 (da €350 a €250) è valido solo per i primi 10 iscritti. Affrettati — i posti si stanno esaurendo!
-        <span class="fa-bn">€100 ছাড় (€350 থেকে €250) শুধুমাত্র প্রথম ১০ জনের জন্য। তাড়াতাড়ি করুন!</span>
+      <div class="faq-a">Lo sconto di €100 (da €300 a €220) è valido solo per i primi 10 iscritti. Affrettati — i posti si stanno esaurendo!
+        <span class="fa-bn">€80 ছাড় (€300 থেকে €220) শুধুমাত্র প্রথম ১০ জনের জন্য। তাড়াতাড়ি করুন!</span>
       </div>
     </div>
     <div class="faq-item">
@@ -801,7 +779,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 <!-- FOOTER -->
 <footer>
   <strong>🇮🇹 Italiano Pro Bangla — Corsi per bengalesi in Italia</strong>
-  <span class="fbn">বাংলাদেশী ও বাংলাভাষীদের জন্য ইতালীয় ভাষা কোর্স &nbsp;|&nbsp; © 2025</span>
+  <span class="fbn">বাংলাদেশী ও বাংলাভাষীদের জন্য ইতালিয়ান ভাষা কোর্স &nbsp;|&nbsp; © 2025</span>
 </footer>
 
 <script>
