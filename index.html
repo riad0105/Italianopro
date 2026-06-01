@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Italiano Pro Bangla</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Tiro+Bangla&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
-<!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -121,6 +120,46 @@ section{padding:5rem 1.5rem}
 .date-item .di-date{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900}
 .date-item .di-bn{font-family:'Tiro Bangla',serif;font-size:1rem;opacity:.85;margin-top:.2rem}
 
+/* ── ORARI ── */
+.orari-bg{background:var(--dark)}
+.orari-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.2rem;max-width:900px;margin:2.5rem auto 0;
+}
+.orario-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:1.6rem 1.4rem;
+  text-align:center;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.orario-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,146,70,.15),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.orario-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,146,70,.2)}
+.orario-card:hover::before{opacity:1}
+.orario-day{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:900;color:white;margin-bottom:.3rem;
+}
+.orario-day-bn{font-family:'Tiro Bangla',serif;font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:.9rem}
+.orario-time{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold),var(--warm));
+  color:white;border-radius:50px;
+  padding:.45rem 1.2rem;font-size:1.3rem;font-weight:800;
+  box-shadow:0 4px 16px rgba(245,166,35,.3);
+}
+.orario-time-bn{font-family:'Tiro Bangla',serif;font-size:.78rem;color:rgba(255,255,255,.45);margin-top:.6rem}
+.orari-note{
+  text-align:center;margin-top:2rem;
+  color:rgba(255,255,255,.45);font-size:.88rem;
+}
+.orari-note span{font-family:'Tiro Bangla',serif;display:block;margin-top:.3rem;font-size:.82rem;color:rgba(255,255,255,.3)}
+
 /* ── COURSE ── */
 .course-bg{background:var(--cream)}
 .course-card{
@@ -227,6 +266,24 @@ section{padding:5rem 1.5rem}
 .pc-opt .opt-icon{display:block;font-size:1.5rem;margin-bottom:.3rem}
 .pc-opt .opt-bn{font-family:'Tiro Bangla',serif;font-size:.75rem;color:#888;display:block;margin-top:.2rem}
 
+/* ── SCHEDULE CHOOSE (form) ── */
+.schedule-choose{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.4rem}
+.sc-opt{
+  border:2px solid #e8e8e8;border-radius:14px;padding:.85rem 1rem;
+  text-align:center;cursor:pointer;transition:all .2s;
+  font-weight:700;font-size:.88rem;line-height:1.4;
+}
+.sc-opt:hover,.sc-opt.active{border-color:var(--green);background:#f0fff4;color:var(--green)}
+.sc-opt .sc-day{display:block;font-size:1rem;font-weight:800;color:inherit}
+.sc-opt .sc-time{
+  display:inline-block;margin-top:.35rem;
+  background:linear-gradient(135deg,var(--gold),var(--warm));
+  color:white;border-radius:50px;padding:.2rem .75rem;font-size:.85rem;font-weight:800;
+}
+.sc-opt.active .sc-time{background:linear-gradient(135deg,var(--green),#00b356)}
+.sc-opt .sc-bn{font-family:'Tiro Bangla',serif;font-size:.72rem;color:#aaa;display:block;margin-top:.3rem}
+.sc-opt.active .sc-bn{color:var(--green)}
+
 /* ── SUBMIT BUTTON ── */
 .submit-btn{
   width:100%;padding:1.1rem;
@@ -240,7 +297,6 @@ section{padding:5rem 1.5rem}
 .submit-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
 .submit-bn{font-family:'Tiro Bangla',serif;font-size:.82rem;opacity:.8;display:block;margin-top:.2rem}
 
-/* spinner inside button */
 .btn-spinner{
   display:inline-block;width:16px;height:16px;
   border:2px solid rgba(255,255,255,.4);border-top-color:white;
@@ -284,10 +340,14 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 /* ── RESPONSIVE ── */
 @media(max-width:620px){
   nav .nav-links{display:none}
-  .form-row,.info-grid,.payment-choose{grid-template-columns:1fr}
+  .form-row,.info-grid,.payment-choose,.schedule-choose{grid-template-columns:1fr}
   .course-levels{grid-template-columns:1fr}
   .cl{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
   .dates-grid{flex-direction:column;align-items:center}
+  .orari-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:400px){
+  .orari-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -298,6 +358,7 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
   <div class="nav-logo" style="font-size:0.95rem;white-space:nowrap;gap:0.25rem">🇮🇹 <span style="color:var(--green)">Italiano</span><span style="color:var(--red)"> Pro Bangla</span></div>
   <div class="nav-links">
     <a href="#corso">Corso</a>
+    <a href="#orari">Orari</a>
     <a href="#pagamento">Pagamento</a>
     <a href="#iscrizione">Iscriviti</a>
     <a href="#faq">FAQ</a>
@@ -471,6 +532,51 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
   </div>
 </section>
 
+<!-- ORARI -->
+<section class="orari-bg" id="orari">
+  <h2 class="section-title" style="color:white">🕐 Orari delle <span style="background:linear-gradient(90deg,var(--gold),var(--warm));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Lezioni</span></h2>
+  <span class="section-bn" style="color:rgba(255,255,255,.5)">ক্লাসের সময়সূচী</span>
+  <p class="section-sub" style="color:rgba(255,255,255,.45)">Scegli la fascia oraria che fa per te — 5 corsi disponibili.<br><span style="font-family:'Tiro Bangla',serif;font-size:.9rem">আপনার সুবিধামতো সময় বেছে নিন — ৫টি কোর্স উপলব্ধ</span></p>
+
+  <div class="orari-grid">
+    <div class="orario-card">
+      <div class="orario-day">Lunedì</div>
+      <div class="orario-day-bn">সোমবার</div>
+      <div class="orario-time">17:00</div>
+      <div class="orario-time-bn">বিকেল ৫:০০</div>
+    </div>
+    <div class="orario-card">
+      <div class="orario-day">Martedì</div>
+      <div class="orario-day-bn">মঙ্গলবার</div>
+      <div class="orario-time">21:00</div>
+      <div class="orario-time-bn">রাত ৯:০০</div>
+    </div>
+    <div class="orario-card">
+      <div class="orario-day">Mercoledì</div>
+      <div class="orario-day-bn">বুধবার</div>
+      <div class="orario-time">21:00</div>
+      <div class="orario-time-bn">রাত ৯:০০</div>
+    </div>
+    <div class="orario-card">
+      <div class="orario-day">Giovedì</div>
+      <div class="orario-day-bn">বৃহস্পতিবার</div>
+      <div class="orario-time">17:00</div>
+      <div class="orario-time-bn">বিকেল ৫:০০</div>
+    </div>
+    <div class="orario-card">
+      <div class="orario-day">Venerdì</div>
+      <div class="orario-day-bn">শুক্রবার</div>
+      <div class="orario-time">16:00</div>
+      <div class="orario-time-bn">বিকেল ৪:০০</div>
+    </div>
+  </div>
+
+  <p class="orari-note">
+    📌 Ogni classe ha max 7–8 posti. Al momento dell'iscrizione scegli il giorno preferito.
+    <span>প্রতি ক্লাসে সর্বোচ্চ ৭-৮ জন। নথিভুক্তির সময় পছন্দের দিন বেছে নিন।</span>
+  </p>
+</section>
+
 <!-- PAYMENT -->
 <section class="payment-bg" id="pagamento">
   <h2 class="section-title">Piani di <span class="highlight">Pagamento</span></h2>
@@ -510,7 +616,6 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <span class="fbn">নথিভুক্তি শুরু: ১ জুন ২০২৫ | ক্লাস শুরু: ১৫ জুন | প্রতি ক্লাসে সর্বোচ্চ ৭-৮ জন</span>
     </div>
 
-    <!-- form senza action: gestito da EmailJS via JS -->
     <form id="enroll-form">
       <div class="form-row">
         <div class="form-group">
@@ -542,6 +647,39 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
           <option value="base">Qualche parola — কিছু শব্দ জানি</option>
           <option value="a1">Ho già studiato un po' — কিছুটা জানি</option>
         </select>
+      </div>
+
+      <!-- ORARIO PREFERITO -->
+      <div class="form-group">
+        <label>Orario preferito <span class="lbn">পছন্দের ক্লাসের সময়</span></label>
+        <div class="schedule-choose">
+          <div class="sc-opt" onclick="selectSchedule(this,'Lunedì 17:00')">
+            <span class="sc-day">Lunedì</span>
+            <span class="sc-time">17:00</span>
+            <span class="sc-bn">সোমবার বিকেল ৫টা</span>
+          </div>
+          <div class="sc-opt" onclick="selectSchedule(this,'Martedì 21:00')">
+            <span class="sc-day">Martedì</span>
+            <span class="sc-time">21:00</span>
+            <span class="sc-bn">মঙ্গলবার রাত ৯টা</span>
+          </div>
+          <div class="sc-opt" onclick="selectSchedule(this,'Mercoledì 21:00')">
+            <span class="sc-day">Mercoledì</span>
+            <span class="sc-time">21:00</span>
+            <span class="sc-bn">বুধবার রাত ৯টা</span>
+          </div>
+          <div class="sc-opt" onclick="selectSchedule(this,'Giovedì 17:00')">
+            <span class="sc-day">Giovedì</span>
+            <span class="sc-time">17:00</span>
+            <span class="sc-bn">বৃহস্পতিবার বিকেল ৫টা</span>
+          </div>
+          <div class="sc-opt" onclick="selectSchedule(this,'Venerdì 16:00')" style="grid-column:1/-1;max-width:50%;margin:0 auto;width:100%">
+            <span class="sc-day">Venerdì</span>
+            <span class="sc-time">16:00</span>
+            <span class="sc-bn">শুক্রবার বিকেল ৪টা</span>
+          </div>
+        </div>
+        <input type="hidden" name="orario_preferito" id="f-schedule"/>
       </div>
 
       <!-- PAYMENT PLAN -->
@@ -587,6 +725,16 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
   <p class="section-sub">Risposte alle domande più comuni / সবচেয়ে সাধারণ প্রশ্নের উত্তর</p>
 
   <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Posso scegliere qualsiasi orario?
+        <div class="fq-bn">আমি কি যেকোনো সময় বেছে নিতে পারি?</div>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Sì! Ci sono 5 corsi con orari diversi: Lunedì 17:00, Martedì 21:00, Mercoledì 21:00, Giovedì 17:00 e Venerdì 16:00. Ogni classe ha max 7–8 posti, quindi scegli subito il tuo orario preferito nel modulo di iscrizione.
+        <span class="fa-bn">হ্যাঁ! ৫টি ভিন্ন সময়ের কোর্স আছে। নথিভুক্তির সময় আপনার পছন্দের সময় বেছে নিন।</span>
+      </div>
+    </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
         Posso comprare solo il livello A0 o A1?
@@ -657,20 +805,22 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
 </footer>
 
 <script>
-  // ── EmailJS init ──────────────────────────────────────────
-  emailjs.init('amI7zkN3o539HGjsb');   // Public Key
-
+  emailjs.init('amI7zkN3o539HGjsb');
   const SERVICE_ID  = 'service_vsk4bfo';
   const TEMPLATE_ID = 'template_5ctj4yx';
 
-  // ── Payment plan select ───────────────────────────────────
+  function selectSchedule(el, val) {
+    el.closest('.schedule-choose').querySelectorAll('.sc-opt').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('f-schedule').value = val;
+  }
+
   function selectPlan(el, val) {
     el.parentElement.querySelectorAll('.pc-opt').forEach(e => e.classList.remove('active'));
     el.classList.add('active');
     document.getElementById('f-plan').value = val;
   }
 
-  // ── FAQ toggle ────────────────────────────────────────────
   function toggleFaq(el) {
     const item = el.parentElement;
     const wasOpen = item.classList.contains('open');
@@ -678,7 +828,6 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     if (!wasOpen) item.classList.add('open');
   }
 
-  // ── Smooth scroll ─────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -687,12 +836,16 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     });
   });
 
-  // ── Form submit → EmailJS ─────────────────────────────────
   document.getElementById('enroll-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Validate piano pagamento
-    const piano = document.getElementById('f-plan').value;
+    const piano    = document.getElementById('f-plan').value;
+    const orario   = document.getElementById('f-schedule').value;
+
+    if (!orario) {
+      alert('Seleziona un orario preferito.\nপছন্দের সময় বেছে নিন।');
+      return;
+    }
     if (!piano) {
       alert('Seleziona un piano di pagamento.\nপেমেন্ট পরিকল্পনা বেছে নিন।');
       return;
@@ -702,44 +855,39 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
     const successEl = document.getElementById('success-msg');
     const errorEl   = document.getElementById('error-msg');
 
-    // Reset messages
     successEl.style.display = 'none';
     errorEl.style.display   = 'none';
-
-    // Loading state
     btn.disabled  = true;
     btn.innerHTML = '<span class="btn-spinner"></span> Invio in corso… / পাঠানো হচ্ছে…';
 
-    // Collect form data
     const formData = new FormData(this);
     const templateParams = {
-      nome:            formData.get('nome'),
-      cognome:         formData.get('cognome'),
-      email:           formData.get('email'),
-      telefono:        formData.get('telefono'),
-      citta:           formData.get('citta') || '—',
-      livello:         formData.get('livello'),
-      piano_pagamento: piano,
-      note:            formData.get('note') || '—',
+      nome:             formData.get('nome'),
+      cognome:          formData.get('cognome'),
+      email:            formData.get('email'),
+      telefono:         formData.get('telefono'),
+      citta:            formData.get('citta') || '—',
+      livello:          formData.get('livello'),
+      orario_preferito: orario,
+      piano_pagamento:  piano,
+      note:             formData.get('note') || '—',
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
       .then(() => {
-        // Success
         successEl.style.display = 'block';
         document.getElementById('enroll-form').reset();
-        document.querySelectorAll('.pc-opt').forEach(o => o.classList.remove('active'));
-        document.getElementById('f-plan').value = '';
+        document.querySelectorAll('.pc-opt,.sc-opt').forEach(o => o.classList.remove('active'));
+        document.getElementById('f-plan').value     = '';
+        document.getElementById('f-schedule').value = '';
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
       .catch((err) => {
-        // Error
         console.error('EmailJS error:', err);
         errorEl.style.display = 'block';
         errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
       .finally(() => {
-        // Restore button
         btn.disabled  = false;
         btn.innerHTML = 'Invia la richiesta di iscrizione <span class="submit-bn">নথিভুক্তির অনুরোধ পাঠান</span>';
       });
