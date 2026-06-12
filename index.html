@@ -154,6 +154,48 @@ section{padding:5rem 1.5rem}
   box-shadow:0 6px 20px rgba(245,166,35,.35);letter-spacing:1px;
 }
 .orario-time-bn{font-family:'Tiro Bangla',serif;font-size:.8rem;color:rgba(255,255,255,.4);margin-top:.75rem}
+/* sold-out & available */
+.sold-out-badge{
+  font-size:.72rem;font-weight:800;letter-spacing:.5px;
+  color:#ff6b6b;background:rgba(255,107,107,.12);
+  border:1px solid rgba(255,107,107,.25);
+  border-radius:50px;padding:.25rem .8rem;
+  display:inline-block;margin-bottom:.7rem;
+}
+.available-badge{
+  font-size:.72rem;font-weight:800;letter-spacing:.5px;
+  color:#00e676;background:rgba(0,230,118,.12);
+  border:1px solid rgba(0,230,118,.3);
+  border-radius:50px;padding:.25rem .8rem;
+  display:inline-block;margin-bottom:.7rem;
+}
+.orario-card.sold-out{
+  opacity:.5;filter:grayscale(.6);
+  pointer-events:none;
+}
+.orario-card.orario-available{
+  border-color:var(--green);
+  box-shadow:0 0 0 2px rgba(0,146,70,.3),0 16px 40px rgba(0,146,70,.2);
+}
+.orario-time-sold{
+  background:linear-gradient(135deg,#555,#777) !important;
+  box-shadow:none !important;
+}
+/* form sold-out */
+.sc-disabled{
+  opacity:.45;pointer-events:none;filter:grayscale(.5);
+}
+.sc-sold{
+  display:block;font-size:.72rem;font-weight:800;
+  color:#ff6b6b;margin-bottom:.3rem;
+}
+.sc-avail{
+  color:#00c853 !important;
+}
+.sc-time-sold{
+  background:linear-gradient(135deg,#666,#888) !important;
+  box-shadow:none !important;
+}
 .orari-note{
   text-align:center;margin-top:2.5rem;
   color:rgba(255,255,255,.4);font-size:.88rem;
@@ -539,22 +581,25 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
   <p class="section-sub" style="color:rgba(255,255,255,.45)">Scegli la fascia oraria che fa per te — 3 corsi disponibili.<br><span style="font-family:'Tiro Bangla',serif;font-size:.9rem">আপনার সুবিধামতো সময় বেছে নিন — ৩টি কোর্স উপলব্ধ</span></p>
 
   <div class="orari-grid">
-    <div class="orario-card">
+    <div class="orario-card sold-out">
+      <div class="sold-out-badge">🔴 Posti Esauriti &nbsp;|&nbsp; আসন শেষ</div>
       <div class="orario-day">Martedì</div>
       <div class="orario-day-bn">মঙ্গলবার</div>
-      <div class="orario-time">21:00</div>
+      <div class="orario-time orario-time-sold">21:00</div>
       <div class="orario-time-bn">রাত ৯:০০</div>
     </div>
-    <div class="orario-card">
+    <div class="orario-card orario-available">
+      <div class="available-badge">✅ Disponibile &nbsp;|&nbsp; আসন আছে</div>
       <div class="orario-day">Mercoledì</div>
       <div class="orario-day-bn">বুধবার</div>
       <div class="orario-time">21:00</div>
       <div class="orario-time-bn">রাত ৯:০০</div>
     </div>
-    <div class="orario-card">
+    <div class="orario-card sold-out">
+      <div class="sold-out-badge">🔴 Posti Esauriti &nbsp;|&nbsp; আসন শেষ</div>
       <div class="orario-day">Giovedì</div>
       <div class="orario-day-bn">বৃহস্পতিবার</div>
-      <div class="orario-time">16:00</div>
+      <div class="orario-time orario-time-sold">16:00</div>
       <div class="orario-time-bn">বিকেল ৪:০০</div>
     </div>
   </div>
@@ -641,19 +686,22 @@ footer .fbn{font-family:'Tiro Bangla',serif;display:block;margin-top:.4rem;font-
       <div class="form-group">
         <label>Orario preferito <span class="lbn">পছন্দের ক্লাসের সময়</span></label>
         <div class="schedule-choose">
-          <div class="sc-opt" onclick="selectSchedule(this,'Martedì 21:00')">
+          <div class="sc-opt sc-disabled">
+            <span class="sc-sold">🔴 Esaurito / আসন শেষ</span>
             <span class="sc-day">Martedì</span>
-            <span class="sc-time">21:00</span>
+            <span class="sc-time sc-time-sold">21:00</span>
             <span class="sc-bn">মঙ্গলবার রাত ৯টা</span>
           </div>
           <div class="sc-opt" onclick="selectSchedule(this,'Mercoledì 21:00')">
+            <span class="sc-sold sc-avail">✅ Disponibile</span>
             <span class="sc-day">Mercoledì</span>
             <span class="sc-time">21:00</span>
             <span class="sc-bn">বুধবার রাত ৯টা</span>
           </div>
-          <div class="sc-opt" onclick="selectSchedule(this,'Giovedì 16:00')" style="grid-column:1/-1;max-width:50%;margin:0 auto;width:100%">
+          <div class="sc-opt sc-disabled" style="grid-column:1/-1;max-width:50%;margin:0 auto;width:100%">
+            <span class="sc-sold">🔴 Esaurito / আসন শেষ</span>
             <span class="sc-day">Giovedì</span>
-            <span class="sc-time">16:00</span>
+            <span class="sc-time sc-time-sold">16:00</span>
             <span class="sc-bn">বৃহস্পতিবার বিকেল ৪টা</span>
           </div>
         </div>
